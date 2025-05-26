@@ -1,0 +1,381 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRU School Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #bababa;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #e3e3e3;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-700 antialiased">
+    <div class="flex h-screen max-w-full overflow-hidden">
+      <aside
+        id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 w-60 transform bg-white shadow-lg transition-transform duration-300 ease-in-out sm:relative sm:translate-x-0 -translate-x-full flex flex-col border-b border-gray-200"
+      >
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-gray-200">
+          <div class="relative flex items-center gap-1 shrink-0">
+            <div class="w-8 h-8 rounded-full bg-purple-600"></div>
+            <div class="w-10 h-10 rounded-full bg-green-600 -ml-3"></div>
+            <div
+              class="w-4 h-4 rounded-full bg-blue-900 absolute top-0 right-0"
+            ></div>
+          </div>
+          <span class="font-semibold text-lg text-purple-700">SRU School</span>
+          <button
+            id="close-sidebar-btn"
+            class="sm:hidden ml-auto text-gray-500 hover:text-gray-700 focus:outline-none"
+            aria-label="Close sidebar"
+          >
+            <i class="fas fa-times fa-fw"></i>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-2 px-4 py-6 overflow-y-auto">
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-th-large fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Dashboard</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-user-tie fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Teacher</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-user-graduate fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Student</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-calendar-check fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Attendance</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-calendar-alt fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Calendar</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-chart-bar fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Report</span>
+          </a>
+        </nav>
+
+        <div class="px-4 py-3 border-t border-gray-200">
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-user fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Profile</span>
+          </a>
+        </div>
+      </aside>
+
+      <div class="flex-1 flex flex-col overflow-x-hidden">
+        <header
+          class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200"
+        >
+          <div class="flex items-center justify-between h-16 px-4 sm:px-6">
+            <div class="flex items-center">
+              <button
+                id="open-sidebar-btn"
+                class="sm:hidden text-gray-500 hover:text-gray-700 mr-4 focus:outline-none"
+                aria-label="Open sidebar"
+              >
+                <i class="fas fa-bars fa-fw"></i>
+              </button>
+              <form
+                class="relative w-[300px] max-w-xs sm:max-w-sm md:max-w-md hidden sm:block"
+              >
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input
+                  type="search"
+                  name="search"
+                  id="search"
+                  placeholder="Search..."
+                  class="block w-full bg-gray-100 border border-transparent rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                />
+              </form>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button
+                class="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-purple-600 focus:outline-none focus:bg-gray-100"
+                aria-label="Notifications"
+              >
+                <i class="fas fa-bell fa-fw"></i>
+              </button>
+              <button
+                class="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-purple-600 focus:outline-none focus:bg-gray-100"
+                aria-label="User Profile"
+              >
+                <i class="fas fa-user fa-fw"></i>
+              </button>
+              <button
+                class="p-2 rounded-full text-red-500 hover:bg-red-100 focus:outline-none focus:bg-red-100"
+                aria-label="Logout"
+              >
+                <i class="fas fa-sign-out-alt fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main class="flex-1 p-4 mt-[-5px] sm:p-6 bg-gray-100 overflow-y-auto">
+          <div
+            th:fragment="content"
+            class="bg-white shadow-md rounded-lg bg-clip-border w-full"
+          >
+            <div
+              class="w-full flex justify-between items-center mb-3 mt-1 pl-3"
+            >
+              <div class="w-full">
+                <div class="flex justify-between items-center mb-4 border-b-2">
+          <h2 class="font-bold text-[35px] mt-3 text-black select-none">Assign teacher</h2>
+          <div class="text-[15px] font-sans text-gray-400 select-none mr-3 mt-3">
+            <span >student :</span>
+            <span class="font-semibold text-gray-700">245</span>
+            <span>Class :</span>
+            <span class="font-semibold text-gray-700">20</span>
+          </div>
+        </div>
+
+                <div class="w-full flex justify-between items-center">
+                  <div class="w-[150px] md:w-[300px] max-w-sm min-w-[150px]">
+                    <div class="relative">
+                      <select
+                        class="w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none hover:border-purple-400 shadow-sm focus:shadow-md appearance-none cursor-pointer"
+                      >
+                        <option value="brazil">Brazil</option>
+                        <option value="bucharest">Bucharest</option>
+                        <option value="london">London</option>
+                        <option value="washington">Washington</option>
+                      </select>
+                      <svg
+                        xmlns="http://www.w3.org/2000/svg"
+                        fill="none"
+                        viewBox="0 0 24 24"
+                        stroke-width="1.2"
+                        stroke="currentColor"
+                        class="h-5 w-5 ml-1 absolute top-2.5 right-2.5 text-slate-700"
+                      >
+                        <path
+                          stroke-linecap="round"
+                          stroke-linejoin="round"
+                          d="M8.25 15 12 18.75 15.75 15m-7.5-6L12 5.25 15.75 9"
+                        />
+                      </svg>
+                    </div>
+                  </div>
+
+                  <div
+                    class="w-[250px] md:w-[300px] max-w-sm min-w-[150px] relative"
+                  >
+                    <div class="relative">
+                      <label>
+                        <input
+                          class="bg-white w-full pr-11 h-10 pl-3 py-2 bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded transition duration-300 ease focus:outline-none focus:border-purple-300 hover:border-purple-400 shadow-sm focus:shadow-md"
+                          placeholder="Search for invoice..."
+                        />
+                      </label>
+                      <button
+                        class="absolute h-8 w-8 right-1 top-1 my-auto px-2 flex items-center bg-white rounded"
+                        type="button"
+                      >
+                        <svg
+                          xmlns="http://www.w3.org/2000/svg"
+                          fill="none"
+                          viewBox="0 0 24 24"
+                          stroke-width="3"
+                          stroke="currentColor"
+                          class="w-8 h-8 text-slate-600"
+                        >
+                          <path
+                            stroke-linecap="round"
+                            stroke-linejoin="round"
+                            d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z"
+                          />
+                        </svg>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div
+              class="relative flex flex-col w-full h-[500px] overflow-y-auto text-gray-700 bg-white shadow-md rounded-lg bg-clip-border"
+            >
+              <table class="w-full table-auto text-left min-w-max">
+                <thead class="sticky top-0 bg-slate-50">
+                  <tr>
+                    <th class="p-4 border-b border-slate-300">
+                      <p
+                        class="block text-sm font-bold leading-none text-slate-500"
+                      >
+                        Product_ID
+                      </p>
+                    </th>
+                    <th class="p-4 border-b border-slate-300">
+                      <p
+                        class="block text-sm font-bold leading-none text-slate-500"
+                      >
+                        Product_Name
+                      </p>
+                    </th>
+                    <th class="p-4 border-b border-slate-300">
+                      <p
+                        class="block text-sm font-bold leading-none text-slate-500"
+                      >
+                        Category_ID
+                      </p>
+                    </th>
+                    <th class="p-4 border-b border-slate-300">
+                      <p
+                        class="block text-sm font-bold leading-none text-slate-500"
+                      >
+                        Unit_Price
+                      </p>
+                    </th>
+                    <th class="p-4 border-b border-slate-300">
+                      <p
+                        class="block text-sm font-bold leading-none text-slate-500"
+                      >
+                        Action
+                      </p>
+                    </th>
+                    <th class="p-4 border-b border-slate-300">
+                      <p
+                        class="block text-sm font-bold leading-none text-slate-500"
+                      >
+                        Print
+                      </p>
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <tr class="hover:bg-slate-50">
+                    <td class="p-4 border-b border-slate-200 py-5">
+                      <p class="block font-semibold text-sm text-slate-800">
+                        UU0001
+                      </p>
+                    </td>
+                    <td class="p-4 border-b border-slate-200 py-5">
+                      <p class="text-sm text-slate-500">John Doe</p>
+                    </td>
+                    <td class="p-4 border-b border-slate-200 py-5">
+                      <p class="text-sm text-slate-500">Male</p>
+                    </td>
+                    <td class="p-4 border-b border-slate-200 py-5">
+                      <p class="text-sm text-slate-500">2024-08-01</p>
+                    </td>
+                    <td class="p-4 border-b flex gap-2 border-slate-200 py-5">
+                      <button
+                        class="rounded-md border border-slate-300 py-2 px-4 text-center text-sm shadow-sm hover:shadow-lg text-slate-600 hover:bg-purple-700 hover:border-purple-700 hover:text-white transition-all duration-300 ease-in-out"
+                        type="button"
+                      >
+                        Edit
+                      </button>
+
+                      <button
+                        class="rounded-md border border-slate-300 py-2 px-4 text-center text-sm shadow-sm hover:shadow-lg text-slate-600 hover:bg-red-800 hover:border-red-800 hover:text-white transition-all duration-300 ease-in-out"
+                        type="button"
+                      >
+                        delete
+                      </button>
+                      <!-- <p class="text-sm text-slate-500">0188366629023</p> -->
+                    </td>
+                    <td class="p-4 border-b border-slate-200 py-5">
+                      <p class="text-sm text-slate-500">print</p>
+                    </td>
+
+                    <!-- Repeated rows omitted for brevity; include as needed -->
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const openSidebarBtn = document.getElementById("open-sidebar-btn");
+      const closeSidebarBtn = document.getElementById("close-sidebar-btn");
+
+      function openSidebar() {
+        sidebar.classList.remove("-translate-x-full");
+        // Optional: Add focus to the close button or first focusable element in sidebar
+        // closeSidebarBtn.focus();
+      }
+
+      function closeSidebar() {
+        sidebar.classList.add("-translate-x-full");
+        // Optional: Return focus to the open button
+        // openSidebarBtn.focus();
+      }
+
+      if (openSidebarBtn && sidebar) {
+        openSidebarBtn.addEventListener("click", openSidebar);
+      }
+
+      if (closeSidebarBtn && sidebar) {
+        closeSidebarBtn.addEventListener("click", closeSidebar);
+      }
+
+      // Optional: Close sidebar when clicking outside on mobile
+      // document.addEventListener('click', (event) => {
+      //     if (sidebar && !sidebar.contains(event.target) && !openSidebarBtn.contains(event.target) && !sidebar.classList.contains('-translate-x-full')) {
+      //          if (window.innerWidth < 640) { // sm breakpoint
+      //             closeSidebar();
+      //          }
+      //     }
+      // });
+
+      // Optional: Close sidebar with Escape key
+      // document.addEventListener('keydown', (event) => {
+      //     if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+      //         if (window.innerWidth < 640) { // sm breakpoint
+      //            closeSidebar();
+      //         }
+      //     }
+      // });
+    </script>
+  </body>
+</html>
