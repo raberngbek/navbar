@@ -1,0 +1,329 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SRU School Dashboard</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    />
+    <style>
+      ::-webkit-scrollbar {
+        width: 8px;
+      }
+      ::-webkit-scrollbar-thumb {
+        background: #bababa;
+        border-radius: 4px;
+      }
+      ::-webkit-scrollbar-track {
+        background: #e3e3e3;
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100 text-gray-700 antialiased">
+    <div class="flex h-screen max-w-full overflow-hidden">
+      <aside
+        id="sidebar"
+        class="fixed inset-y-0 left-0 z-50 w-60 transform bg-white shadow-lg transition-transform duration-300 ease-in-out sm:relative sm:translate-x-0 -translate-x-full flex flex-col border-b border-gray-200"
+      >
+        <div class="flex items-center gap-2 px-4 py-3 border-b border-gray-200">
+          <div class="relative flex items-center gap-1 shrink-0">
+            <div class="w-8 h-8 rounded-full bg-purple-600"></div>
+            <div class="w-10 h-10 rounded-full bg-green-600 -ml-3"></div>
+            <div
+              class="w-4 h-4 rounded-full bg-blue-900 absolute top-0 right-0"
+            ></div>
+          </div>
+          <span class="font-semibold text-lg text-purple-700">SRU School</span>
+          <button
+            id="close-sidebar-btn"
+            class="sm:hidden ml-auto text-gray-500 hover:text-gray-700 focus:outline-none"
+            aria-label="Close sidebar"
+          >
+            <i class="fas fa-times fa-fw"></i>
+          </button>
+        </div>
+
+        <nav class="flex-1 space-y-2 px-4 py-6 overflow-y-auto">
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-th-large fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Dashboard</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-user-tie fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Teacher</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-user-graduate fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Student</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-calendar-check fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Attendance</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-calendar-alt fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Calendar</span>
+          </a>
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-chart-bar fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Report</span>
+          </a>
+        </nav>
+
+        <div class="px-4 py-3 border-t border-gray-200">
+          <a
+            href="#"
+            class="flex items-center gap-3 px-3 py-2 rounded-md text-gray-600 hover:bg-purple-100 hover:text-purple-700 transition-colors"
+          >
+            <i class="fas fa-user fa-fw text-lg"></i>
+            <span class="text-sm font-medium">Profile</span>
+          </a>
+        </div>
+      </aside>
+
+      <div class="flex-1 flex flex-col overflow-x-hidden">
+        <header
+          class="sticky top-0 z-40 bg-white shadow-sm border-b border-gray-200"
+        >
+          <div class="flex items-center justify-between h-16 px-4 sm:px-6">
+            <div class="flex items-center">
+              <button
+                id="open-sidebar-btn"
+                class="sm:hidden text-gray-500 hover:text-gray-700 mr-4 focus:outline-none"
+                aria-label="Open sidebar"
+              >
+                <i class="fas fa-bars fa-fw"></i>
+              </button>
+              <form
+                class="relative w-[300px] max-w-xs sm:max-w-sm md:max-w-md hidden sm:block"
+              >
+                <div
+                  class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none"
+                >
+                  <i class="fas fa-search text-gray-400"></i>
+                </div>
+                <input
+                  type="search"
+                  name="search"
+                  id="search"
+                  placeholder="Search..."
+                  class="block w-full bg-gray-100 border border-transparent rounded-md py-2 pl-10 pr-3 text-sm placeholder-gray-500 focus:outline-none focus:bg-white focus:border-purple-500 focus:ring-1 focus:ring-purple-500"
+                />
+              </form>
+            </div>
+
+            <div class="flex items-center gap-3">
+              <button
+                class="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-purple-600 focus:outline-none focus:bg-gray-100"
+                aria-label="Notifications"
+              >
+                <i class="fas fa-bell fa-fw"></i>
+              </button>
+              <button
+                class="p-2 rounded-full text-gray-500 hover:bg-gray-100 hover:text-purple-600 focus:outline-none focus:bg-gray-100"
+                aria-label="User Profile"
+              >
+                <i class="fas fa-user fa-fw"></i>
+              </button>
+              <button
+                class="p-2 rounded-full text-red-500 hover:bg-red-100 focus:outline-none focus:bg-red-100"
+                aria-label="Logout"
+              >
+                <i class="fas fa-sign-out-alt fa-fw"></i>
+              </button>
+            </div>
+          </div>
+        </header>
+
+        <main class="flex-1 mt-[-5px] p-2 sm:p-4 bg-gray-100 overflow-y-auto">
+          <div class="w-full p-2 sm:p-4 rounded-lg bg-white shadow-md"  >
+            <header class="flex items-center space-x-2 mb-4">
+              <h2 class="font-extrabold text-lg">April, 2025</h2>
+              <button
+                type="button"
+                class="flex items-center space-x-1 border border-gray-300 rounded-md bg-white px-3 py-1 text-sm hover:bg-gray-50"
+              >
+                <span>Add event</span>
+                <i class="fas fa-plus text-lg"></i>
+              </button>
+            </header>
+            <table class="w-full border-collapse table-fixed bg-white">
+              <thead
+                class="text-xs text-gray-400 font-semibold border-b border-gray-200"
+              >
+                <tr>
+                  <th class="py-2 px-2 w-1/7 text-left">SUN</th>
+                  <th class="py-2 px-2 w-1/7 text-left">MON</th>
+                  <th class="py-2 px-2 w-1/7 text-left">TUE</th>
+                  <th class="py-2 px-2 w-1/7 text-left">WED</th>
+                  <th class="py-2 px-2 w-1/7 text-left">THUR</th>
+                  <th class="py-2 px-2 w-1/7 text-left">FRI</th>
+                  <th class="py-2 px-2 w-1/7 text-left">SAT</th>
+                </tr>
+              </thead>
+              <tbody class="text-sm text-black">
+                <tr class="border-b border-gray-200">
+                  <td class="py-4 px-2 text-gray-400">30</td>
+                  <td class="py-4 px-2 text-gray-400">31</td>
+                  <td class="py-4 px-2 align-top bg-green-100">
+                    <div>April 1</div>
+                    <div class="font-bold text-xs mt-2">
+                      5-Minute Workouts for Busy People
+                    </div>
+                    <div class="text-xs text-green-600 mt-1">Robert Fox</div>
+                  </td>
+                  <td class="py-4 px-2 align-top">2</td>
+                  <td class="py-4 px-2 align-top">3</td>
+                  <td class="py-4 px-2 align-top bg-red-100">
+                    <div>4</div>
+                    <div class="font-bold text-xs mt-2">
+                      How to Start Exercising as a Beginner
+                    </div>
+                    <div class="text-xs text-red-600 mt-1">Annette Black</div>
+                  </td>
+                  <td class="py-4 px-2 align-top">5</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-4 px-2 align-top">
+                    6
+                    <div class="font-bold text-xs mt-2">
+                      Best Stretches to Improve Flexibility
+                    </div>
+                    <div class="text-xs text-gray-400 mt-1">Dianne Russell</div>
+                  </td>
+                  <td class="py-4 px-2 align-top">7</td>
+                  <td class="py-4 px-2 align-top bg-yellow-100">
+                    <div>8</div>
+                    <div class="font-bold text-xs mt-2">
+                      Bodyweight Exercises You Can Do at Home
+                    </div>
+                    <div class="text-xs text-yellow-700 mt-1">
+                      Darrell Steward
+                    </div>
+                  </td>
+                  <td class="py-4 px-2 align-top">9</td>
+                  <td class="py-4 px-2 align-top">10</td>
+                  <td class="py-4 px-2 align-top">11</td>
+                  <td class="py-4 px-2 align-top">12</td>
+                </tr>
+                <tr class="border-b border-gray-200">
+                  <td class="py-4 px-2 align-top">13</td>
+                  <td class="py-4 px-2 align-top bg-pink-100">
+                    <div>14</div>
+                    <div class="font-bold text-xs mt-2">
+                      How to Stay Motivated to Work Out
+                    </div>
+                    <div class="text-xs text-pink-600 mt-1">Kristin Watson</div>
+                  </td>
+                  <td class="py-4 px-2 align-top">15</td>
+                  <td class="py-4 px-2 align-top">16</td>
+                  <td class="py-4 px-2 align-top">17</td>
+                  <td class="py-4 px-2 align-top bg-pink-100">
+                    <div>18</div>
+                    <div class="font-bold text-xs mt-2">
+                      The Benefits of Walking Every Day
+                    </div>
+                    <div class="text-xs text-pink-600 mt-1">Devon Lane</div>
+                  </td>
+                  <td class="py-4 px-2 align-top">19</td>
+                </tr>
+                <tr>
+                  <td class="py-4 px-2 align-top bg-yellow-100">
+                    <div>20</div>
+                    <div class="font-bold text-xs mt-2">
+                      Strength Training vs. Cardio: Which Is Better?
+                    </div>
+                    <div class="text-xs text-yellow-700 mt-1">Eleanor Pena</div>
+                  </td>
+                  <td class="py-4 px-2 align-top">21</td>
+                  <td class="py-4 px-2 align-top">22</td>
+                  <td class="py-4 px-2 align-top bg-green-100">
+                    <div>23</div>
+                    <div class="font-bold text-xs mt-2">
+                      Simple Exercises to Reduce Back Pain
+                    </div>
+                    <div class="text-xs text-green-600 mt-1">Jane Cooper</div>
+                  </td>
+                  <td class="py-4 px-2 align-top">24</td>
+                  <td class="py-4 px-2 align-top">25</td>
+                  <td class="py-4 px-2 align-top bg-red-100">
+                    <div>26</div>
+                    <div class="font-bold text-xs mt-2">
+                      How to Create a Workout Routine That Works for You
+                    </div>
+                    <div class="text-xs text-red-600 mt-1">Wade Warren</div>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </main>
+      </div>
+    </div>
+
+    <script>
+      const sidebar = document.getElementById("sidebar");
+      const openSidebarBtn = document.getElementById("open-sidebar-btn");
+      const closeSidebarBtn = document.getElementById("close-sidebar-btn");
+
+      function openSidebar() {
+        sidebar.classList.remove("-translate-x-full");
+        // Optional: Add focus to the close button or first focusable element in sidebar
+        // closeSidebarBtn.focus();
+      }
+
+      function closeSidebar() {
+        sidebar.classList.add("-translate-x-full");
+        // Optional: Return focus to the open button
+        // openSidebarBtn.focus();
+      }
+
+      if (openSidebarBtn && sidebar) {
+        openSidebarBtn.addEventListener("click", openSidebar);
+      }
+
+      if (closeSidebarBtn && sidebar) {
+        closeSidebarBtn.addEventListener("click", closeSidebar);
+      }
+
+      // Optional: Close sidebar when clicking outside on mobile
+      // document.addEventListener('click', (event) => {
+      //     if (sidebar && !sidebar.contains(event.target) && !openSidebarBtn.contains(event.target) && !sidebar.classList.contains('-translate-x-full')) {
+      //          if (window.innerWidth < 640) { // sm breakpoint
+      //             closeSidebar();
+      //          }
+      //     }
+      // });
+
+      // Optional: Close sidebar with Escape key
+      // document.addEventListener('keydown', (event) => {
+      //     if (event.key === 'Escape' && !sidebar.classList.contains('-translate-x-full')) {
+      //         if (window.innerWidth < 640) { // sm breakpoint
+      //            closeSidebar();
+      //         }
+      //     }
+      // });
+    </script>
+  </body>
+</html>
